@@ -135,11 +135,57 @@ a {
   justify-content: space-between;
   padding: 10px 40px;
 }
+@media screen and (max-width: 468px) {
+  .all_pokemons .navbar {
+    padding: 10px;
+    gap: 2rem;
+  }
+}
+.all_pokemons .navbar .search {
+  border: 2px solid #e1e1e1;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.0509803922);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 30px;
+  padding: 0 10px;
+}
+.all_pokemons .navbar .search input {
+  padding: 5px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+}
+.all_pokemons .navbar .search input:focus {
+  outline: none;
+}
+.all_pokemons .navbar .theme_selector {
+  border: 2px solid #868686;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.all_pokemons .navbar .theme_selector > a {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #e85382;
+}
 
 .all_pokemons .navbar .logo_container {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+@media screen and (max-width: 552px) {
+  .all_pokemons .navbar .logo_container {
+    display: none;
+  }
 }
 
 .all_pokemons .navbar .logo_container img {
@@ -151,6 +197,11 @@ a {
   font-size: 24px;
   font-weight: 600;
   font-family: clashDisplay;
+}
+@media screen and (max-width: 718px) {
+  .all_pokemons .navbar .logo_container p {
+    display: none;
+  }
 }
 
 .all_pokemons .navbar .logo_container p span {
@@ -164,6 +215,32 @@ a {
   gap: 4rem 2rem;
   margin: auto;
   width: 80%;
+}
+@media screen and (max-width: 1025px) {
+  .all_pokemons .pokemon_list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 848px) {
+  .all_pokemons .pokemon_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 540px) {
+  .all_pokemons .pokemon_list {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 482px) {
+  .all_pokemons .pokemon_list {
+    grid-template-columns: 1fr;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .all_pokemons .pokemon_list {
+    width: 80%;
+  }
 }
 
 .all_pokemons .pokemon_list > div {

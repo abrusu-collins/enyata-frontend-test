@@ -28,14 +28,12 @@ function AllPokemons() {
         </div>
 
         <div className="search">
-          <GoSearch size={20} />
+          <GoSearch size={30} color="#dfdfdf" />
           <input type="text" name="" id="" placeholder="Enter pokemon name" />
         </div>
 
-        <div>
-          <div>
-            <div>a</div>
-          </div>
+        <div className="theme_selector">
+          <a href=""></a>
         </div>
       </div>
       <div className="pokemon_list">
