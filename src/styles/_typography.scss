@@ -1,0 +1,12 @@
+@font-face {
+  font-family: clashDisplay;
+  src: url("../fonts/ClashDisplay-Medium.otf");
+}
+@font-face {
+  font-family: generalSans;
+  src: url("../fonts/GeneralSans-Regular.woff");
+}
+@mixin header1 {
+  font-size: 54px;
+  font-weight: 600;
+}

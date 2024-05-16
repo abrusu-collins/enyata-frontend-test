@@ -1,0 +1,22 @@
+@mixin primary_button($background, $color) {
+  text-decoration: none;
+  background-color: $background;
+  color: $color;
+  padding: 5px 20px;
+  display: inline-block;
+  border-radius: 5px;
+}
+@mixin gridder($gap, $left_fraction, $right_fraction) {
+  display: grid;
+  grid-template-columns: $left_fraction $right_fraction;
+  gap: $gap;
+  margin: auto;
+}
+
+@mixin flex_base($align: null, $justify: null, $gap: null, $direction: null) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+  flex-direction: $direction;
+}

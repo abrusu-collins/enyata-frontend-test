@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 28.8px;
+  scroll-behavior: smooth;
+}
+html{
+    font-family: generalSans;
+
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+//   html {
+//     color: $grey_text;
+//     background-color: $grey_bg;
+//   }
+.container {
+  max-width: 1366px;
+}
