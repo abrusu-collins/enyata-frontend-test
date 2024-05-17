@@ -11,7 +11,7 @@
     width: 80%;
     margin: auto;
     padding-bottom: 150px;
-    @include flex_base(center, space-between, null, null);
+    @include flex_base(flex-start, space-between, null, null);
     & .page_size_selector {
       background-color: $grey3;
       @include flex_base(center, null, 1rem, null);
@@ -26,6 +26,26 @@
         background-color: $white;
         padding: 5px 10px;
         border-radius: 10px;
+      }
+    }
+
+    & .sizes {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 5px;
+      font-family: clashDisplay;
+      background-color: $white;
+      border-radius: 8px;
+      margin-top: 10px;
+
+      & a {
+        text-align: center;
+        padding: 5px 20px;
+        border-radius: 8px;
+        &:hover {
+          background-color: $grey4;
+        }
       }
     }
   }

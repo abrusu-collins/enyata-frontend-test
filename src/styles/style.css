@@ -19,17 +19,6 @@ a {
   max-width: 1366px;
 }
 
-.sizes {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px;
-  font-family: clashDisplay;
-}
-.sizes a {
-  padding: 5px 40px;
-  border-radius: 8px;
-}
 @font-face {
   font-family: clashDisplay;
   src: url("../fonts/ClashDisplay-Medium.otf");
@@ -142,7 +131,7 @@ a {
   margin: auto;
   padding-bottom: 150px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 .all_pokemons .pagination_and_page_size_selector .page_size_selector {
@@ -162,6 +151,24 @@ a {
   background-color: #ffffff;
   padding: 5px 10px;
   border-radius: 10px;
+}
+.all_pokemons .pagination_and_page_size_selector .sizes {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+  font-family: clashDisplay;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.all_pokemons .pagination_and_page_size_selector .sizes a {
+  text-align: center;
+  padding: 5px 20px;
+  border-radius: 8px;
+}
+.all_pokemons .pagination_and_page_size_selector .sizes a:hover {
+  background-color: #f3f3f3;
 }
 
 .all_pokemons .navbar {

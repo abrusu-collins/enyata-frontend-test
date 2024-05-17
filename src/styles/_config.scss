@@ -20,19 +20,3 @@ a {
 .container {
   max-width: 1366px;
 }
-.sizes {
-  display: flex;
-  flex-direction: column;
-  gap:5px;
-  padding: 10px ;
-  font-family: clashDisplay;
-& a{
-  // background-color: red;
-  // width:100%;
-  padding: 5px 40px;
-  border-radius: 8px;
-  &:hover{
-    // background-color: $grey4;
-  }
-}
-}

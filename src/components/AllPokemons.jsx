@@ -7,32 +7,45 @@ import { GoChevronDown } from "react-icons/go";
 import Popover from "@mui/material/Popover";
 function AllPokemons() {
   const paginationSizes = [8, 12, 16, 24];
-  const [displayCount, setDisplayCount] = useState(paginationSizes[0]);
+  const [displayCount, setDisplayCount] = useState(0);
   const [offset, setOffset] = useState(0);
   const [pokemonTotalCount, setPokemonTotalCount] = useState(0);
   const [pokemonData, setPokemonData] = useState([]);
+  const [displayData, setDisplayData] = useState([]);
   const [pokemonIndex, setPokemonIndex] = useState(null);
+  const [paginationSizeIndex, setPaginationIndex] = useState(0);
+
   const fetchAllPokemons = async () => {
+    const tempArray = [];
     getAllPokemons().then((res) => {
       console.log(res);
-      setPokemonData(res.results);
+
+      for (let i of res.results) {
+        tempArray.push({ ...i, id: res.results.indexOf(i) + 1 });
+      }
+      setPokemonData(tempArray);
+      setDisplayCount(paginationSizes[0]);
     });
   };
   useEffect(() => {
     fetchAllPokemons();
   }, []);
+  const changeDisplayData = (displayCount) => {
+    if (pokemonData.length > 0) {
+      const tempArray = [...pokemonData];
+      setDisplayData(tempArray.splice(0, displayCount));
+    }
+  };
+  useEffect(() => {
+    if (displayCount > 0) {
+      changeDisplayData(displayCount);
+    }
+  }, [displayCount]);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
   return (
     <div className="all_pokemons">
       <div className="navbar">
@@ -53,8 +66,8 @@ function AllPokemons() {
         </div>
       </div>
       <div className="pokemon_list">
-        {pokemonData.length > 0 &&
-          pokemonData.splice(0, displayCount).map((pokemon, index) => {
+        {displayData.length > 0 &&
+          displayData.map((pokemon, index) => {
             return (
               <div
                 key={`${pokemon.name}+${index}`}
@@ -73,6 +86,7 @@ function AllPokemons() {
                     alt=""
                   />
                 </div>
+                <p>{pokemon.id}</p>
                 <p className="pokemon_name">{pokemon.name}</p>
                 {pokemonIndex === index && (
                   <a href="">
@@ -107,29 +121,26 @@ function AllPokemons() {
         </div>
         <div className="popover_and_selector">
           <button className="page_size_selector" onClick={handleClick}>
-            <div className="number">8</div>
+            <div className="number">{paginationSizes[paginationSizeIndex]}</div>
             <GoChevronDown size={20} />
           </button>
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            <div className="sizes">
-              {paginationSizes.map((paginationSize, index) => {
-                return (
-                  <a href="" key={`${index + paginationSize}`}>
-                    {paginationSize}
-                  </a>
-                );
-              })}
-            </div>
-          </Popover>
+          <div className="sizes">
+            {paginationSizes.map((paginationSize, index) => {
+              return (
+                <a
+                  href=" "
+                  key={`${index + paginationSize}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPaginationIndex(index);
+                    setDisplayCount(paginationSizes[index]);
+                  }}
+                >
+                  {paginationSize}
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
