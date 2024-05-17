@@ -116,7 +116,7 @@ function AllPokemons() {
             anchorEl={anchorEl}
             onClose={handleClose}
             anchorOrigin={{
-              vertical: "bottom",
+              vertical: "top",
               horizontal: "left",
             }}
           >

@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
 import "./styles/style.css";
 import AllPokemons from "./components/AllPokemons";
 import NotFound from "./components/NotFound";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,13 +17,13 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <NotFound/>,
+    element: <NotFound />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 
