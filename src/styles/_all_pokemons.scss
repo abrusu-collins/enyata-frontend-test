@@ -3,6 +3,33 @@
   background-size: cover;
   background-position: center;
   background-color: #f1f1f1;
+  & .pagination_and_page_size_selector {
+    // margin:
+    font-family: clashDisplay;
+    font-size: 18px;
+    font-weight: 500;
+    width: 80%;
+    margin: auto;
+    padding-bottom: 150px;
+    @include flex_base(center, space-between, null, null);
+    & .page_size_selector {
+      background-color: $grey3;
+      @include flex_base(center, null, 1rem, null);
+      padding: 5px 10px;
+      border-radius: 10px;
+      border: none;
+      font-family: clashDisplay;
+      &:hover {
+        cursor: pointer;
+      }
+      & .number {
+        background-color: $white;
+        padding: 5px 10px;
+        border-radius: 10px;
+      }
+    }
+
+  }
 }
 .all_pokemons .navbar {
   background-color: #ffffff;
