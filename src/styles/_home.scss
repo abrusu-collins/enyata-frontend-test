@@ -19,11 +19,11 @@
     }
   }
   & .search_container {
-    @include flex_base(center, center, 10px, null);
-    border: 6px solid $pink;
+    @include flex_base(center, space-between, 10px, null);
+    border: 10px solid $pink;
     border-radius: 40px;
     width: 30%;
-    padding: 10px;
+    padding: 10px 7px;
     margin-top: 7vh;
     & input {
       padding: 5px;

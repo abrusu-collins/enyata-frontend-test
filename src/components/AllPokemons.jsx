@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { getAllPokemons } from "../services/pokemons";
 import { IoEyeSharp } from "react-icons/io5";
+import Pagination from "@mui/material/Pagination";
+// aria-current="true"
 function AllPokemons() {
   const [limit, setLimit] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -67,6 +69,24 @@ function AllPokemons() {
               </div>
             );
           })}
+      </div>
+
+      <div className="pagination_and_page_size_selector">
+        <div className="pagination">
+          <Pagination count={10} shape="rounded"  sx={{
+            '& .MuiPaginationItem-root': {
+              color: 'white',
+              backgroundColor: 'darkblue',
+              '&:hover': {
+                backgroundColor: 'darkred',
+              },
+              '&.Mui-selected': {
+                backgroundColor: 'darkgreen',
+              },
+            },
+          }}/>
+        </div>
+        <div className="page_size_selector"></div>
       </div>
     </div>
   );

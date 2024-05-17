@@ -58,12 +58,12 @@ a {
 .home .search_container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
-  border: 6px solid #e85382;
+  border: 10px solid #e85382;
   border-radius: 40px;
   width: 30%;
-  padding: 10px;
+  padding: 10px 7px;
   margin-top: 7vh;
 }
 .home .search_container input {
