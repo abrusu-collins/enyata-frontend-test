@@ -1,7 +1,7 @@
 import axios from "axios";
 export const getAllPokemons = async () => {
   try {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=500`);
     return response.data;
   } catch (error) {
     throw error;

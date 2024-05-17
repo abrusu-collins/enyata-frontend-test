@@ -6,12 +6,12 @@ import Pagination from "@mui/material/Pagination";
 import { GoChevronDown } from "react-icons/go";
 import Popover from "@mui/material/Popover";
 function AllPokemons() {
-  const [limit, setLimit] = useState(0);
+  const paginationSizes = [8, 12, 16, 24];
+  const [displayCount, setDisplayCount] = useState(paginationSizes[0]);
   const [offset, setOffset] = useState(0);
   const [pokemonTotalCount, setPokemonTotalCount] = useState(0);
   const [pokemonData, setPokemonData] = useState([]);
   const [pokemonIndex, setPokemonIndex] = useState(null);
-  const paginationSizes = [8, 12, 16, 24];
   const fetchAllPokemons = async () => {
     getAllPokemons().then((res) => {
       console.log(res);
@@ -54,7 +54,7 @@ function AllPokemons() {
       </div>
       <div className="pokemon_list">
         {pokemonData.length > 0 &&
-          pokemonData.map((pokemon, index) => {
+          pokemonData.splice(0, displayCount).map((pokemon, index) => {
             return (
               <div
                 key={`${pokemon.name}+${index}`}
