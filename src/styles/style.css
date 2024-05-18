@@ -150,6 +150,7 @@ a {
   border-radius: 10px;
   border: none;
   font-family: clashDisplay;
+  color: #000000;
 }
 .all_pokemons .pagination_and_page_size_selector .page_size_selector:hover {
   cursor: pointer;

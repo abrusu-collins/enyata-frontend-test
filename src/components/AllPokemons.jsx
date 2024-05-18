@@ -123,16 +123,26 @@ function AllPokemons() {
     }
   }, [currentPokemon]);
   const fetchAllPokemons = async () => {
+    Nprogress.start();
     const tempArray = [];
-    getAllPokemons().then((res) => {
-      console.log(res);
+    getAllPokemons()
+      .then((res) => {
+        console.log(res);
 
-      for (let i of res.results) {
-        tempArray.push({ ...i, id: res.results.indexOf(i) + 1 });
-      }
-      setPokemonData(tempArray);
-      setDisplayCount(paginationSizes[0]);
-    });
+        for (let i of res.results) {
+          tempArray.push({ ...i, id: res.results.indexOf(i) + 1 });
+        }
+        setPokemonData(tempArray);
+        setDisplayCount(paginationSizes[0]);
+      })
+      .catch((error) => {
+        setErrorMessage(
+          "An error occured, please check your internet and  refresh the page"
+        );
+      })
+      .finally(() => {
+        Nprogress.done();
+      });
   };
   useEffect(() => {
     fetchAllPokemons();
