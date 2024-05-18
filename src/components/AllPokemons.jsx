@@ -13,6 +13,8 @@ import useStore from "../store/store";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import Modal from "@mui/material/Modal";
+import Nprogress from "nprogress";
+import "nprogress/nprogress.css";
 function AllPokemons() {
   const pokemonName = useStore((state) => state.pokemonName);
   const setPokemonName = useStore((state) => state.setPokemonName);
@@ -85,6 +87,7 @@ function AllPokemons() {
     setcurrentPokemon(activePokemon);
   };
   const fetchSinglePokemon = async (name) => {
+    Nprogress.start();
     getSinglePokemon(name.toLowerCase())
       .then((res) => {
         console.log(res);
@@ -98,6 +101,9 @@ function AllPokemons() {
         } else {
           setErrorMessage(`An error occured`);
         }
+      })
+      .finally(() => {
+        Nprogress.done();
       });
   };
   useEffect(() => {
