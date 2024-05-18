@@ -16,6 +16,8 @@ import Modal from "@mui/material/Modal";
 function AllPokemons() {
   const pokemonName = useStore((state) => state.pokemonName);
   const setPokemonName = useStore((state) => state.setPokemonName);
+  const theme = useStore((state) => state.theme);
+  const setTheme = useStore((state) => state.setTheme);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const themeColors = [
@@ -164,7 +166,7 @@ function AllPokemons() {
         >
           <img src="/images/pokemons.svg" alt="" />
           <p>
-            Poke<span>book</span>
+            Poke<span style={{ color: theme }}>book</span>
           </p>
         </div>
 
@@ -194,7 +196,10 @@ function AllPokemons() {
               e.preventDefault();
               handleModalOpen();
             }}
-          >&nbsp;</a>
+            style={{ background: theme }}
+          >
+            &nbsp;
+          </a>
         </div>
       </div>
       <div className="pokemon_list">
@@ -227,6 +232,7 @@ function AllPokemons() {
                         id: pokemon.id,
                       });
                     }}
+                    style={{ backgroundColor: theme }}
                   >
                     <p>View Pokemon</p>
                     <IoEyeSharp size={25} />
@@ -254,7 +260,7 @@ function AllPokemons() {
                   backgroundColor: "#e1e1e1",
                 },
                 "&.Mui-selected": {
-                  backgroundColor: "#e85382",
+                  backgroundColor: theme,
                 },
                 "&.MuiPaginationItem-ellipsis": {
                   background: "transparent",
@@ -393,7 +399,7 @@ function AllPokemons() {
                           >
                             <div
                               style={{
-                                background: "#e85382",
+                                background: theme,
                                 width:
                                   stat.base_stat > 100
                                     ? "100%"
@@ -465,8 +471,30 @@ function AllPokemons() {
         aria-describedby="modal-modal-description"
       >
         <div className="theme_modal">
-          <div>Choose Theme</div>
-          <div>colors</div>
+          <p>Choose Theme</p>
+          <div className="themes">
+            {themeColors.map((color, i) => {
+              return (
+                <div
+                  key={i}
+                  style={{
+                    border: theme === color.hexCode && ` 1px solid black`,
+                  }}
+                >
+                  <a
+                    href=" "
+                    style={{ background: color.hexCode }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setTheme(color.hexCode);
+                    }}
+                  >
+                    &nbsp;
+                  </a>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Modal>
     </div>

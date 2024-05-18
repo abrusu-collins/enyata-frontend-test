@@ -14,13 +14,13 @@
   & .title {
     @include header1;
     font-family: clashDisplay;
-    & span {
-      color: $pink;
-    }
+    // & span {
+    //   color: $pink;
+    // }
   }
   & .search_container {
     @include flex_base(center, space-between, 10px, null);
-    border: 10px solid $pink;
+    // border: 10px solid $pink;
     border-radius: 40px;
     width: 30%;
     padding: 10px 7px;
@@ -36,7 +36,7 @@
       }
     }
     & a {
-      background-color: $pink;
+      // background-color: $pink;
       height: 34px;
       width: 34px;
       @include flex_base(center, center, null, null);

@@ -8,6 +8,7 @@ function Home() {
   const navigate = useNavigate();
   const setPokemonName = useStore((state) => state.setPokemonName);
   const pokemonName = useStore((state) => state.pokemonName);
+  const theme = useStore((state) => state.theme);
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const openTheSnackBar = () => {
     setOpenSnackBar(true);
@@ -36,14 +37,17 @@ function Home() {
     <div className="home">
       <img src="/images/pokemons.svg" alt="" />
       <p className="title">
-        Poké<span>book</span>
+        Poké<span style={{ color: theme }}>book</span>
       </p>
       <p className="text">
         Largest Pokémon index with information <br /> about every Pokemon you
         can think of.
       </p>
 
-      <div className="search_container">
+      <div
+        className="search_container"
+        style={{ border: `10px solid ${theme}` }}
+      >
         <input
           type="text"
           placeholder="Enter pokemon name"
@@ -51,7 +55,7 @@ function Home() {
             setPokemonName(e.currentTarget.value);
           }}
         />
-        <a href="" onClick={searchPokemon}>
+        <a href=" " onClick={searchPokemon} style={{ backgroundColor: theme }}>
           <GoSearch color="#fcfeff" size={20} />
         </a>
       </div>

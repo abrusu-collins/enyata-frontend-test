@@ -1,0 +1,41 @@
+.theme_modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: $white;
+  background-image: url("../../public/images/noise.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+  & p {
+    font-size: 24px;
+    text-align: center;
+    font-family: clashDisplay;
+    padding: 10px 0;
+  }
+  & .themes {
+    background-color: $grey;
+    background-image: url("../../public/images/noise.png");
+    @include flex_base(center, center, 1rem, null);
+    padding: 20px 0;
+    //   border-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+    & > div {
+    //   border: 1px solid $black;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      @include flex_base(center, center, null, null);
+
+      & > a {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

@@ -57,15 +57,11 @@ a {
   font-weight: 600;
   font-family: clashDisplay;
 }
-.home .title span {
-  color: #e85382;
-}
 .home .search_container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  border: 10px solid #e85382;
   border-radius: 40px;
   width: 30%;
   padding: 10px 7px;
@@ -82,7 +78,6 @@ a {
   outline: none;
 }
 .home .search_container a {
-  background-color: #e85382;
   height: 34px;
   width: 34px;
   display: flex;
@@ -228,7 +223,6 @@ a {
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  background-color: #e85382;
 }
 
 .all_pokemons .navbar .logo_container {
@@ -259,10 +253,6 @@ a {
   .all_pokemons .navbar .logo_container p {
     display: none;
   }
-}
-
-.all_pokemons .navbar .logo_container p span {
-  color: #e85382;
 }
 
 .all_pokemons .pokemon_list {
@@ -333,7 +323,6 @@ a {
 }
 
 .all_pokemons .pokemon_list > div > a {
-  background-color: #e85382;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -538,4 +527,47 @@ a {
   .drawer_inner_container .drawer_menu {
     width: 95%;
   }
+}
+
+.theme_modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: #ffffff;
+  background-image: url("../../public/images/noise.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+}
+.theme_modal p {
+  font-size: 24px;
+  text-align: center;
+  font-family: clashDisplay;
+  padding: 10px 0;
+}
+.theme_modal .themes {
+  background-color: #f1f1f1;
+  background-image: url("../../public/images/noise.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 20px 0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.theme_modal .themes > div {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.theme_modal .themes > div > a {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }

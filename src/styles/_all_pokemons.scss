@@ -94,7 +94,7 @@
       height: 30px;
       width: 30px;
       border-radius: 50%;
-      background-color: $pink;
+      // background-color: $pink;
     }
   }
 }
@@ -121,9 +121,9 @@
     display: none;
   }
 }
-.all_pokemons .navbar .logo_container p span {
-  color: #e85382;
-}
+// .all_pokemons .navbar .logo_container p span {
+//   color: #e85382;
+// }
 .all_pokemons .pokemon_list {
   padding: 100px 0 60px 0;
   display: grid;
@@ -178,7 +178,7 @@
   font-weight: 500;
 }
 .all_pokemons .pokemon_list > div > a {
-  background-color: #e85382;
+  // background-color: #e85382;
   display: flex;
   align-items: center;
   justify-content: space-between;
