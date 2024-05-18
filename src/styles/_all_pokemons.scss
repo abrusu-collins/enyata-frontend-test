@@ -1,5 +1,5 @@
 .all_pokemons {
-  background-image: url("../../public/images/bg-img.png");
+  background-image: url("../../public/images/noise.png");
   background-size: cover;
   background-position: center;
   background-color: #f1f1f1;
@@ -52,7 +52,7 @@
 }
 .all_pokemons .navbar {
   background-color: #ffffff;
-  background-image: url("../../public/images/bg-img.png");
+  background-image: url("../../public/images/noise.png");
   background-size: cover;
   background-position: center;
   box-shadow: 0px 14px 24px 0px rgba(0, 0, 0, 0.0509803922);
@@ -169,6 +169,9 @@
 .all_pokemons .pokemon_list > div .pokemon_name {
   margin: 20px auto;
   text-align: center;
+  font-family: clashDisplay;
+  font-size: 24px;
+  font-weight: 500;
 }
 .all_pokemons .pokemon_list > div > a {
   background-color: #e85382;

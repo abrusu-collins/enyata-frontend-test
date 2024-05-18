@@ -4,18 +4,44 @@ import { getAllPokemons } from "../services/pokemons";
 import { IoEyeSharp } from "react-icons/io5";
 import Pagination from "@mui/material/Pagination";
 import { GoChevronDown } from "react-icons/go";
+import { getSinglePokemon } from "../services/pokemons";
 // import Popover from "@mui/material/Popover";
+import Drawer from "@mui/material/Drawer";
 function AllPokemons() {
+  const [open, setOpen] = useState(false);
   const paginationSizes = [8, 12, 16, 24];
   const [displayCount, setDisplayCount] = useState(0);
   // const [offset, setOffset] = useState(0);
-  // const [pokemonTotalCount, setPokemonTotalCount] = useState(0);
+  const [singlePokemonData, setSinglePokemonData] = useState(null);
+  const [currentPokemon, setcurrentPokemon] = useState(null);
   const [pokemonData, setPokemonData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [pokemonIndex, setPokemonIndex] = useState(null);
   const [paginationSizeIndex, setPaginationIndex] = useState(0);
   const [page, setPage] = useState(1);
   const [showPageSizeController, setShowPageSizeController] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+  const changeCurrentPokemon = (e, activePokemon) => {
+    // console.log(activePokemon);
+    e.preventDefault();
+    setcurrentPokemon(activePokemon);
+    // toggleDrawer(true);
+    setOpen(true);
+  };
+  const fetchSinglePokemon = async (name) => {
+    getSinglePokemon(name).then((res) => {
+      console.log(res);
+      setSinglePokemonData(res);
+    });
+  };
+
+  useEffect(() => {
+    if (currentPokemon) {
+      fetchSinglePokemon(currentPokemon.name);
+    }
+  }, [currentPokemon]);
   const fetchAllPokemons = async () => {
     const tempArray = [];
     getAllPokemons().then((res) => {
@@ -97,10 +123,18 @@ function AllPokemons() {
                     alt=""
                   />
                 </div>
-                <p>{pokemon.id}</p>
+                {/* <p>{pokemon.id}</p> */}
                 <p className="pokemon_name">{pokemon.name}</p>
                 {pokemonIndex === index && (
-                  <a href="">
+                  <a
+                    href=" "
+                    onClick={(e) => {
+                      changeCurrentPokemon(e, {
+                        name: pokemon.name,
+                        id: pokemon.id,
+                      });
+                    }}
+                  >
                     <p>View Pokemon</p>
                     <IoEyeSharp size={25} />
                   </a>
@@ -173,6 +207,87 @@ function AllPokemons() {
           )}
         </div>
       </div>
+
+      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+        <div className="drawer_inner_container">
+          <div>
+            <div>back</div>
+            {currentPokemon && (
+              <img
+                src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${currentPokemon.id}.svg`}
+                alt=""
+              />
+            )}
+          </div>
+          {singlePokemonData && (
+            <div>
+              <p>{singlePokemonData.name}</p>
+
+              <div className="types">
+                {singlePokemonData.types.map((type, i) => {
+                  return <p key={`${type.type.name}+${i}`}>{type.type.name}</p>;
+                })}
+              </div>
+
+              <div className="about">
+                <p>About</p>
+                <div>
+                  <p>Height</p>
+                  <p>{singlePokemonData.height}</p>
+                </div>
+                <div>
+                  <p>Weight</p>
+                  <p>{singlePokemonData.weight}</p>
+                </div>
+                <div>
+                  <p>Abilities</p>
+                  <ul>
+                    {singlePokemonData.abilities.map((ability, i) => {
+                      return (
+                        <li key={`${ability.ability.name}+${i}`}>
+                          {ability.ability.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="stats">
+                <p>Stats</p>
+
+                <div>
+                  {singlePokemonData.stats.map((stat, i) => {
+                    return (
+                      <div>
+                        <p>{stat.stat.name}</p>
+                        <div
+                          style={{
+                            background: "red",
+                            width: "100%",
+                            position: "relative",
+                            height: "50px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              background: "green",
+                              width: `${stat.base_stat}%`,
+                              position: "absolute",
+                              height: "50px",
+                            }}
+                          ></div>
+                        </div>
+                        <p>{stat.base_stat}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </Drawer>
     </div>
   );
 }
