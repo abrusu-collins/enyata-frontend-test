@@ -20,12 +20,10 @@
     background-image: url("../../public/images/noise.png");
     @include flex_base(center, center, 1rem, null);
     padding: 20px 0;
-    //   border-radius: 30px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 
     & > div {
-    //   border: 1px solid $black;
       height: 40px;
       width: 40px;
       border-radius: 50%;
