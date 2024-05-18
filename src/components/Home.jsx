@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from "react";
 import useStore from "../store/store";
 import { GoSearch } from "react-icons/go";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 function Home() {
   const navigate = useNavigate();
   const setPokemonName = useStore((state) => state.setPokemonName);
-  // const pokemonName = useStore((state) => state.pokemonName);
-  const [name, setName] = useState("");
-  const searchPokemon = (e) => {
-    e.preventDefault();
-    if (!name) {
-      console.log("no name");
+  const pokemonName = useStore((state) => state.pokemonName);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const openTheSnackBar = () => {
+    setOpenSnackBar(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
       return;
     }
-    setPokemonName(name);
-    navigate('/all-pokemons');
+
+    setOpenSnackBar(false);
   };
+  const searchPokemon = (e) => {
+    e.preventDefault();
+    if (!pokemonName) {
+      console.log("no name");
+      openTheSnackBar();
+      return;
+    }
+    navigate("/all-pokemons");
+  };
+  useEffect(() => {
+    setPokemonName("");
+  }, []);
   return (
     <div className="home">
       <img src="/images/pokemons.svg" alt="" />
@@ -32,7 +48,7 @@ function Home() {
           type="text"
           placeholder="Enter pokemon name"
           onChange={(e) => {
-            setName(e.target.value);
+            setPokemonName(e.currentTarget.value);
           }}
         />
         <a href="" onClick={searchPokemon}>
@@ -41,6 +57,21 @@ function Home() {
       </div>
 
       <a href="/all-pokemons">View all</a>
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={2500}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Please enter pokemon name
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

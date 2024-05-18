@@ -9,9 +9,30 @@ import { getSinglePokemon } from "../services/pokemons";
 import { pokemonEmojis } from "../helpers/emojis";
 import Drawer from "@mui/material/Drawer";
 import { useNavigate } from "react-router-dom";
+import useStore from "../store/store";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import Modal from "@mui/material/Modal";
 function AllPokemons() {
+  const pokemonName = useStore((state) => state.pokemonName);
+  const setPokemonName = useStore((state) => state.setPokemonName);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const themeColors = [
+    {
+      color: "pink",
+      hexCode: "#DE527F",
+    },
+
+    {
+      color: "blue",
+      hexCode: "#39BADF",
+    },
+    {
+      color: "yellow",
+      hexCode: "#E1A725",
+    },
+  ];
   const paginationSizes = [8, 12, 16, 24];
   const drawer_menu_items = [
     {
@@ -37,23 +58,57 @@ function AllPokemons() {
   const [page, setPage] = useState(1);
   const [detailToShow, setDetailToShow] = useState("about");
   const [showPageSizeController, setShowPageSizeController] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const handleModalOpen = () => setOpenModal(true);
+  const handleModalClose = () => setOpenModal(false);
+  const openTheSnackBar = () => {
+    setOpenSnackBar(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBar(false);
+  };
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
   const changeCurrentPokemon = (e, activePokemon) => {
-    // console.log(activePokemon);
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     setcurrentPokemon(activePokemon);
-    // toggleDrawer(true);
-    setOpen(true);
   };
   const fetchSinglePokemon = async (name) => {
-    getSinglePokemon(name).then((res) => {
-      console.log(res);
-      setSinglePokemonData(res);
-    });
+    getSinglePokemon(name.toLowerCase())
+      .then((res) => {
+        console.log(res);
+        setSinglePokemonData(res);
+        setOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 404) {
+          setErrorMessage(`Couldn't find any pokemon named ${pokemonName}`);
+        } else {
+          setErrorMessage(`An error occured`);
+        }
+      });
   };
-
+  useEffect(() => {
+    if (errorMessage) {
+      openTheSnackBar();
+    }
+  }, [errorMessage]);
+  useEffect(() => {
+    if (pokemonName) {
+      setcurrentPokemon({ name: pokemonName });
+      changeCurrentPokemon(null, { name: pokemonName });
+    }
+  }, []);
   useEffect(() => {
     if (currentPokemon) {
       fetchSinglePokemon(currentPokemon.name);
@@ -85,13 +140,9 @@ function AllPokemons() {
       changeDisplayData(displayCount);
     }
   }, [displayCount]);
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+
   const handleChange = (event, value) => {
     setPage(value);
-    // console.log(value);
   };
   const changePage = (value) => {
     const tempArray = [...pokemonData];
@@ -105,7 +156,12 @@ function AllPokemons() {
   return (
     <div className="all_pokemons">
       <div className="navbar">
-        <div className="logo_container" onClick={()=>{navigate("/")}}>
+        <div
+          className="logo_container"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <img src="/images/pokemons.svg" alt="" />
           <p>
             Poke<span>book</span>
@@ -114,11 +170,31 @@ function AllPokemons() {
 
         <div className="search">
           <GoSearch size={30} color="#dfdfdf" />
-          <input type="text" name="" id="" placeholder="Enter pokemon name" />
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Enter pokemon name"
+            onChange={(e) => {
+              setPokemonName(e.currentTarget.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                // console.log("enter");
+                changeCurrentPokemon(null, { name: pokemonName });
+              }
+            }}
+          />
         </div>
 
         <div className="theme_selector">
-          <a href=""></a>
+          <a
+            href=" "
+            onClick={(e) => {
+              e.preventDefault();
+              handleModalOpen();
+            }}
+          >&nbsp;</a>
         </div>
       </div>
       <div className="pokemon_list">
@@ -239,13 +315,11 @@ function AllPokemons() {
               <FaArrowLeftLong size={20} />
             </a>
             {currentPokemon?.id ? (
-              // <div className="poke_sprite">
               <img
                 src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${currentPokemon.id}.svg`}
                 alt=""
               />
             ) : (
-              // </div>
               singlePokemonData && (
                 <img
                   src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${singlePokemonData.id}.svg`}
@@ -304,7 +378,6 @@ function AllPokemons() {
               {detailToShow === "stats" && (
                 <div className="stats">
                   <p className="section_title">Stats</p>
-                  {/* <main></main> */}
                   <div>
                     {singlePokemonData.stats.map((stat, i) => {
                       return (
@@ -355,6 +428,7 @@ function AllPokemons() {
                   className={
                     detailToShow === menu_item.page ? "active_btn" : ""
                   }
+                  key={i}
                   onClick={(e) => {
                     e.preventDefault();
                     setDetailToShow(menu_item.page);
@@ -367,6 +441,34 @@ function AllPokemons() {
           </div>
         </div>
       </Drawer>
+
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
+
+      <Modal
+        open={openModal}
+        onClose={handleModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className="theme_modal">
+          <div>Choose Theme</div>
+          <div>colors</div>
+        </div>
+      </Modal>
     </div>
   );
 }
