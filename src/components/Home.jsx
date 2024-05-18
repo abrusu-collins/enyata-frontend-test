@@ -40,7 +40,7 @@ function Home() {
         </a>
       </div>
 
-      <a href="">View all</a>
+      <a href="/all-pokemons">View all</a>
     </div>
   );
 }

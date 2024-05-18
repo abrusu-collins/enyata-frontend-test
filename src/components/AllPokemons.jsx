@@ -8,7 +8,9 @@ import { GoChevronDown } from "react-icons/go";
 import { getSinglePokemon } from "../services/pokemons";
 import { pokemonEmojis } from "../helpers/emojis";
 import Drawer from "@mui/material/Drawer";
+import { useNavigate } from "react-router-dom";
 function AllPokemons() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const paginationSizes = [8, 12, 16, 24];
   const drawer_menu_items = [
@@ -103,7 +105,7 @@ function AllPokemons() {
   return (
     <div className="all_pokemons">
       <div className="navbar">
-        <div className="logo_container">
+        <div className="logo_container" onClick={()=>{navigate("/")}}>
           <img src="/images/pokemons.svg" alt="" />
           <p>
             Poke<span>book</span>
@@ -236,13 +238,20 @@ function AllPokemons() {
             >
               <FaArrowLeftLong size={20} />
             </a>
-            {currentPokemon && (
+            {currentPokemon?.id ? (
               // <div className="poke_sprite">
               <img
                 src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${currentPokemon.id}.svg`}
                 alt=""
               />
+            ) : (
               // </div>
+              singlePokemonData && (
+                <img
+                  src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${singlePokemonData.id}.svg`}
+                  alt=""
+                />
+              )
             )}
           </div>
           {singlePokemonData && (
