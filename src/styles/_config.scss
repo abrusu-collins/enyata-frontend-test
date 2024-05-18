@@ -5,9 +5,8 @@
   line-height: 28.8px;
   scroll-behavior: smooth;
 }
-html{
-    font-family: generalSans;
-
+html {
+  font-family: generalSans;
 }
 a {
   text-decoration: none;
@@ -19,4 +18,8 @@ a {
 //   }
 .container {
   max-width: 1366px;
+}
+.active_btn {
+  background-color: #fcfeff;
+  border-radius: 40px;
 }

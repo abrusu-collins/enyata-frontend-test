@@ -1,3 +1,204 @@
-.drawer_inner_container{
-    width:45vw;
+.drawer_inner_container {
+  width: 45vw;
+
+  @media screen and (max-width: 1113px) {
+    width: 65vw;
+  }
+  @media screen and (max-width: 996px) {
+    width: 85vw;
+  }
+  @media screen and (max-width: 774px) {
+    width: 95vw;
+  }
+  & .img_container {
+    background: linear-gradient(180deg, #7fcad1 0%, #3da0a9 100%);
+    width: 85%;
+    margin: 20px auto;
+    position: relative;
+    height: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    & .back_arrow {
+      background-color: $white;
+      padding: 15px 20px;
+      @include flex_base(center, center, null, null);
+      display: inline-flex;
+      border-radius: 10px;
+    }
+    & img {
+      object-fit: contain;
+      position: absolute;
+      bottom: -20%;
+      transform: translateX(-50%);
+      left: 50%;
+      width: 400.7px;
+      height: 300.4px;
+      @media screen and (max-width: 425px) {
+        width: 300.7px;
+        height: 200.4px;
+      }
+      //   }
+    }
+  }
+  & .pokemon_details {
+    width: 85%;
+    margin: auto;
+    & .name {
+      font-size: 48px;
+      font-weight: 600;
+      font-family: clashDisplay;
+      margin-top: 80px;
+      text-align: center;
+    }
+    & .types {
+      margin-top: 25px;
+      @include flex_base(center, center, 10px, null);
+      & p {
+        background-color: $grey2;
+        padding: 3px 15px;
+        border-radius: 18px;
+      }
+    }
+    & .line {
+      height: 2px;
+      background: linear-gradient(
+        270deg,
+        rgb(255, 255, 255) -20%,
+        rgba(217, 217, 217, 0.27) 45.3%,
+        rgb(255, 255, 255) 102.92%
+      );
+      margin: 30px auto 10px auto;
+    }
+    & .about {
+      width: 60%;
+      margin: auto;
+      text-align: center;
+      @media screen and (max-width: 649px) {
+        width: 100%;
+      }
+      & .line {
+        height: 2px;
+        background: linear-gradient(
+          270deg,
+          rgb(255, 255, 255) -20%,
+          rgba(217, 217, 217, 0.27) 45.3%,
+          rgb(255, 255, 255) 102.92%
+        );
+        margin: 10px auto 10px auto;
+      }
+      & .section_title {
+        font-size: 24px;
+        font-weight: 600;
+        font-family: clashDisplay;
+      }
+      & > div {
+        background: linear-gradient(
+          270deg,
+          #ffffff 0%,
+          rgba(217, 217, 217, 0.06) 51.04%,
+          #ffffff 100%
+        );
+        font-family: clashDisplay;
+        font-size: 20px;
+        font-weight: 600;
+        @include flex_base(null, null, 10px, column);
+
+        width: 80%;
+        margin: auto;
+        @media screen and (max-width: 649px) {
+          width: 100%;
+        }
+        & > div {
+          @include flex_base(flex-start, space-around, null, null);
+          border-bottom: 1px solid
+            linear-gradient(
+              270deg,
+              rgb(255, 255, 255) -20%,
+              rgba(217, 217, 217, 0.27) 45.3%,
+              rgb(255, 255, 255) 102.92%
+            );
+          & .detail_name {
+            font-family: generalSans;
+            font-weight: 400;
+          }
+        }
+        & main {
+          height: 2px;
+          background: linear-gradient(
+            270deg,
+            rgb(255, 255, 255) -20%,
+            rgba(217, 217, 217, 0.27) 45.3%,
+            rgb(255, 255, 255) 102.92%
+          );
+        }
+      }
+    }
+
+    & .stats {
+      & .section_title {
+        font-size: 24px;
+        font-weight: 600;
+        font-family: clashDisplay;
+        text-align: center;
+      }
+
+      & > div {
+        width: 75%;
+        margin: 20px auto 30px auto;
+
+        & > div {
+          display: grid;
+          grid-template-columns: 1fr 1fr 0.2fr;
+          align-items: center;
+          text-align: right;
+          gap: 1rem;
+          font-family: clashDisplay;
+          font-size: 20px;
+          font-weight: 600;
+          padding: 5px 0;
+          & .stat_name {
+            font-family: generalSans;
+            font-weight: 400;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+  & .similar {
+    & p {
+      font-size: 24px;
+      font-weight: 600;
+      font-family: clashDisplay;
+      text-align: center;
+    }
+    & div {
+      height: 120px;
+    }
+  }
+  & .drawer_menu {
+    box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.06) inset;
+    background: rgba(233, 233, 233, 1);
+    width: 65%;
+    margin: 20px auto;
+    font-family: clashDisplay;
+    @include flex_base(center, space-around, null, null);
+    padding: 10px 0;
+    border-radius: 40px;
+    position: sticky;
+    bottom: 10px;
+    left: 10px;
+    & a {
+      padding: 10px 30px;
+      @media screen and (max-width: 427px) {
+        padding: 10px 15px;
+      }
+    }
+    @media screen and (max-width: 614px) {
+      width: 85%;
+    }
+    @media screen and (max-width: 425px) {
+      width: 95%;
+    }
+  }
 }

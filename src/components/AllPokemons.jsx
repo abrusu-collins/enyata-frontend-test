@@ -1,17 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import { getAllPokemons } from "../services/pokemons";
 import { IoEyeSharp } from "react-icons/io5";
 import Pagination from "@mui/material/Pagination";
 import { GoChevronDown } from "react-icons/go";
 import { getSinglePokemon } from "../services/pokemons";
-// import Popover from "@mui/material/Popover";
+import { pokemonEmojis } from "../helpers/emojis";
 import Drawer from "@mui/material/Drawer";
 function AllPokemons() {
   const [open, setOpen] = useState(false);
   const paginationSizes = [8, 12, 16, 24];
+  const drawer_menu_items = [
+    {
+      name: "About",
+      page: "about",
+    },
+    {
+      name: "Stats",
+      page: "stats",
+    },
+    {
+      name: "Similar",
+      page: "similar",
+    },
+  ];
   const [displayCount, setDisplayCount] = useState(0);
-  // const [offset, setOffset] = useState(0);
   const [singlePokemonData, setSinglePokemonData] = useState(null);
   const [currentPokemon, setcurrentPokemon] = useState(null);
   const [pokemonData, setPokemonData] = useState([]);
@@ -19,6 +33,7 @@ function AllPokemons() {
   const [pokemonIndex, setPokemonIndex] = useState(null);
   const [paginationSizeIndex, setPaginationIndex] = useState(0);
   const [page, setPage] = useState(1);
+  const [detailToShow, setDetailToShow] = useState("about");
   const [showPageSizeController, setShowPageSizeController] = useState(false);
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -210,82 +225,137 @@ function AllPokemons() {
 
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <div className="drawer_inner_container">
-          <div>
-            <div>back</div>
+          <div className="img_container">
+            <a
+              href=" "
+              className="back_arrow"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(false);
+              }}
+            >
+              <FaArrowLeftLong size={20} />
+            </a>
             {currentPokemon && (
+              // <div className="poke_sprite">
               <img
                 src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${currentPokemon.id}.svg`}
                 alt=""
               />
+              // </div>
             )}
           </div>
           {singlePokemonData && (
-            <div>
-              <p>{singlePokemonData.name}</p>
+            <div className="pokemon_details">
+              <p className="name">{singlePokemonData.name}</p>
 
               <div className="types">
                 {singlePokemonData.types.map((type, i) => {
-                  return <p key={`${type.type.name}+${i}`}>{type.type.name}</p>;
+                  return (
+                    <p key={`${type.type.name}+${i}`}>
+                      {pokemonEmojis[type.type.name]}
+                      {type.type.name}
+                    </p>
+                  );
                 })}
               </div>
+              <div className="line"></div>
+              {detailToShow === "about" && (
+                <div className="about">
+                  <p className="section_title">About</p>
+                  <div className="line"></div>
+                  <div>
+                    <div>
+                      <p className="detail_name">Height</p>
+                      <p>{singlePokemonData.height}</p>
+                    </div>
+                    <main></main>
+                    <div>
+                      <p className="detail_name">Weight</p>
+                      <p>{singlePokemonData.weight}</p>
+                    </div>
+                    <main></main>
 
-              <div className="about">
-                <p>About</p>
-                <div>
-                  <p>Height</p>
-                  <p>{singlePokemonData.height}</p>
+                    <div>
+                      <p className="detail_name">Abilities</p>
+                      <ul>
+                        {singlePokemonData.abilities.map((ability, i) => {
+                          return (
+                            <li key={`${ability.ability.name}+${i}`}>
+                              {ability.ability.name}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p>Weight</p>
-                  <p>{singlePokemonData.weight}</p>
-                </div>
-                <div>
-                  <p>Abilities</p>
-                  <ul>
-                    {singlePokemonData.abilities.map((ability, i) => {
+              )}
+
+              {detailToShow === "stats" && (
+                <div className="stats">
+                  <p className="section_title">Stats</p>
+                  {/* <main></main> */}
+                  <div>
+                    {singlePokemonData.stats.map((stat, i) => {
                       return (
-                        <li key={`${ability.ability.name}+${i}`}>
-                          {ability.ability.name}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="stats">
-                <p>Stats</p>
-
-                <div>
-                  {singlePokemonData.stats.map((stat, i) => {
-                    return (
-                      <div>
-                        <p>{stat.stat.name}</p>
-                        <div
-                          style={{
-                            background: "red",
-                            width: "100%",
-                            position: "relative",
-                            height: "50px",
-                          }}
-                        >
+                        <div>
+                          <p className="stat_name">{stat.stat.name}</p>
                           <div
                             style={{
-                              background: "green",
-                              width: `${stat.base_stat}%`,
-                              position: "absolute",
-                              height: "50px",
+                              background: "#CBCBCB",
+                              width: "100%",
+                              position: "relative",
+                              height: "10px",
                             }}
-                          ></div>
+                          >
+                            <div
+                              style={{
+                                background: "#e85382",
+                                width:
+                                  stat.base_stat > 100
+                                    ? "100%"
+                                    : `${stat.base_stat}%`,
+                                position: "absolute",
+                                height: "10px",
+                              }}
+                            ></div>
+                          </div>
+                          <p>{stat.base_stat}</p>
                         </div>
-                        <p>{stat.base_stat}</p>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {detailToShow === "similar" && (
+                <div className="similar">
+                  <p className="section_title">Similar</p>
+                  <div></div>
+                </div>
+              )}
             </div>
           )}
+
+          <div className="drawer_menu">
+            {drawer_menu_items.map((menu_item, i) => {
+              return (
+                <a
+                  href=" "
+                  className={
+                    detailToShow === menu_item.page ? "active_btn" : ""
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setDetailToShow(menu_item.page);
+                  }}
+                >
+                  {menu_item.name}
+                </a>
+              );
+            })}
+          </div>
         </div>
       </Drawer>
     </div>
