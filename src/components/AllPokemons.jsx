@@ -240,19 +240,21 @@ function AllPokemons() {
                 {/* <p>{pokemon.id}</p> */}
                 <p className="pokemon_name">{pokemon.name}</p>
                 {pokemonIndex === index && (
-                  <a
-                    href=" "
-                    onClick={(e) => {
-                      changeCurrentPokemon(e, {
-                        name: pokemon.name,
-                        id: pokemon.id,
-                      });
-                    }}
-                    style={{ backgroundColor: theme }}
-                  >
-                    <p>View Pokemon</p>
-                    <IoEyeSharp size={25} />
-                  </a>
+                  <div className="view_container">
+                    <a
+                      href=" "
+                      onClick={(e) => {
+                        changeCurrentPokemon(e, {
+                          name: pokemon.name,
+                          id: pokemon.id,
+                        });
+                      }}
+                      style={{ backgroundColor: theme }}
+                    >
+                      <p>View Pokemon</p>
+                      <IoEyeSharp size={25} />
+                    </a>
+                  </div>
                 )}
               </div>
             );
