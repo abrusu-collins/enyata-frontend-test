@@ -15,7 +15,7 @@ import Alert from "@mui/material/Alert";
 import Modal from "@mui/material/Modal";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import { getAbundantColor } from "../services/getAbundantColor";
+import { getAverageColor } from "../services/getAverageColor";
 function AllPokemons() {
   const pokemonName = useStore((state) => state.pokemonName);
   const setPokemonName = useStore((state) => state.setPokemonName);
@@ -99,7 +99,7 @@ function AllPokemons() {
         console.log(res);
         setSinglePokemonData(res);
         setOpen(true);
-        getAbundantColor(res.id, setPokemonImgGradients);
+        getAverageColor(res.id, setPokemonImgGradients);
       })
       .catch((err) => {
         console.log(err);
@@ -205,6 +205,10 @@ function AllPokemons() {
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
+                if (!pokemonName) {
+                  setErrorMessage("Enter pokemon name");
+                  return;
+                }
                 changeCurrentPokemon(null, { name: pokemonName });
               }
             }}

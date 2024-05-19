@@ -1,5 +1,5 @@
 import { FastAverageColor } from "fast-average-color";
-export const getAbundantColor = async (pokemonId, callback) => {
+export const getAverageColor = async (pokemonId, callback) => {
   const fac = new FastAverageColor();
   const img = document.createElement("IMG");
   img.crossOrigin = "Anonymous";
