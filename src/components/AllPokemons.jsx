@@ -82,6 +82,10 @@ function AllPokemons() {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+  const closeDrawer = () => {
+    setOpen(false);
+    setDetailToShow("about");
+  };
   const changeCurrentPokemon = (e, activePokemon) => {
     if (e) {
       e.preventDefault();
@@ -109,11 +113,6 @@ function AllPokemons() {
         Nprogress.done();
       });
   };
-  // useEffect(() => {
-  //   if (pokemonImgGradients) {
-  //     console.log(pokemonImgGradients);
-  //   }
-  // }, [pokemonImgGradients]);
   useEffect(() => {
     if (errorMessage) {
       openTheSnackBar();
@@ -206,7 +205,6 @@ function AllPokemons() {
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                // console.log("enter");
                 changeCurrentPokemon(null, { name: pokemonName });
               }
             }}
@@ -245,7 +243,6 @@ function AllPokemons() {
                     alt=""
                   />
                 </div>
-                {/* <p>{pokemon.id}</p> */}
                 <p className="pokemon_name">{pokemon.name}</p>
                 {pokemonIndex === index && (
                   <div className="view_container">
@@ -333,7 +330,7 @@ function AllPokemons() {
         </div>
       </div>
 
-      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+      <Drawer open={open} onClose={closeDrawer} anchor="right">
         <div className="drawer_inner_container">
           <div
             className="img_container"
@@ -348,7 +345,7 @@ function AllPokemons() {
               className="back_arrow"
               onClick={(e) => {
                 e.preventDefault();
-                setOpen(false);
+                closeDrawer();
               }}
             >
               <FaArrowLeftLong size={20} />
