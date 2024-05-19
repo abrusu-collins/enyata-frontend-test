@@ -126,21 +126,25 @@ function AllPokemons() {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.status === 404) {
+        if (err?.response?.status === 404) {
           setErrorMessage(`Couldn't find any pokemon named ${pokemonName}`);
-        } else {
-          setErrorMessage(`An error occured`);
+          openTheSnackBar();
+          return;
         }
+        setErrorMessage(
+          "An error occured, please check your internet and try again"
+        );
+        openTheSnackBar();
       })
       .finally(() => {
         Nprogress.done();
       });
   };
-  useEffect(() => {
-    if (errorMessage) {
-      openTheSnackBar();
-    }
-  }, [errorMessage]);
+  // useEffect(() => {
+  //   if (errorMessage) {
+  //     openTheSnackBar();
+  //   }
+  // }, [errorMessage]);
   useEffect(() => {
     if (pokemonName) {
       setcurrentPokemon({ name: pokemonName });
@@ -157,7 +161,7 @@ function AllPokemons() {
     const tempArray = [];
     getAllPokemons()
       .then((res) => {
-        // console.log(res);
+        // console.log(res);`
 
         for (let i of res.results) {
           tempArray.push({ ...i, id: res.results.indexOf(i) + 1 });
@@ -169,6 +173,7 @@ function AllPokemons() {
         setErrorMessage(
           "An error occured, please check your internet and  refresh the page"
         );
+        openTheSnackBar();
       })
       .finally(() => {
         Nprogress.done();
@@ -230,6 +235,8 @@ function AllPokemons() {
               if (e.key === "Enter") {
                 if (!pokemonName) {
                   setErrorMessage("Enter pokemon name");
+                  openTheSnackBar();
+
                   return;
                 }
                 changeCurrentPokemon(null, { name: pokemonName });
