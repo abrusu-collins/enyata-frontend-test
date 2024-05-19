@@ -60,6 +60,7 @@ function AllPokemons() {
   const [currentPokemon, setcurrentPokemon] = useState(null);
   const [pokemonData, setPokemonData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
+  const [similarPokemonsArray, setSimilarPokemonsArray] = useState([]);
   const [pokemonIndex, setPokemonIndex] = useState(null);
   const [paginationSizeIndex, setPaginationIndex] = useState(0);
   const [page, setPage] = useState(1);
@@ -80,12 +81,13 @@ function AllPokemons() {
     }
     setOpenSnackBar(false);
   };
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
+  // const toggleDrawer = (newOpen) => () => {
+  //   setOpen(newOpen);
+  // };
   const closeDrawer = () => {
     setOpen(false);
     setDetailToShow("about");
+    setSimilarPokemonsArray([]);
   };
   const changeCurrentPokemon = (e, activePokemon) => {
     if (e) {
@@ -98,9 +100,20 @@ function AllPokemons() {
       const filteredArray = res.pokemon.filter((pokemon) => {
         return pokemon.pokemon.name !== currentPokemon.name;
       });
-      console.log(filteredArray.splice(0, 2));
+      const similarPokemons = filteredArray.splice(0, 2);
+      similarPokemons.map(async (similarPokemon) => {
+        return getSinglePokemon(similarPokemon.pokemon.name).then((res) => {
+          // console.log(res);
+          setSimilarPokemonsArray((prev) => [...prev, res]);
+        });
+      });
     });
   };
+  useEffect(() => {
+    if (similarPokemonsArray.length > 0) {
+      console.log(similarPokemonsArray);
+    }
+  }, [similarPokemonsArray]);
   const fetchSinglePokemon = async (name) => {
     Nprogress.start();
     getSinglePokemon(name.toLowerCase())
@@ -422,7 +435,7 @@ function AllPokemons() {
                   <div>
                     {singlePokemonData.stats.map((stat, i) => {
                       return (
-                        <div>
+                        <div key={i}>
                           <p className="stat_name">{stat.stat.name}</p>
                           <div
                             style={{
@@ -455,7 +468,19 @@ function AllPokemons() {
               {detailToShow === "similar" && (
                 <div className="similar">
                   <p className="section_title">Similar</p>
-                  <div></div>
+                  <div>
+                    {similarPokemonsArray.length > 0 &&
+                      similarPokemonsArray.map((pokemon, i) => {
+                        return (
+                          <div key={i}>
+                            <div>
+                              <img src={getPokemonImage(pokemon.id)} alt="" />
+                            </div>
+                            <p>{pokemon.name}</p>
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
               )}
             </div>
