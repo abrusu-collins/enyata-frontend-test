@@ -22,7 +22,9 @@ function Home() {
     setOpenSnackBar(false);
   };
   const searchPokemon = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     if (!pokemonName) {
       console.log("no name");
       openTheSnackBar();
@@ -53,6 +55,11 @@ function Home() {
           placeholder="Enter pokemon name"
           onChange={(e) => {
             setPokemonName(e.currentTarget.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchPokemon();
+            }
           }}
         />
         <a href=" " onClick={searchPokemon} style={{ backgroundColor: theme }}>
