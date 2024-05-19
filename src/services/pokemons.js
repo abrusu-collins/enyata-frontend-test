@@ -17,3 +17,15 @@ export const getSinglePokemon = async (name) => {
     throw error;
   }
 };
+
+
+export const getSimilarPokemons = async (type)=>{
+  try {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/type/${type}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

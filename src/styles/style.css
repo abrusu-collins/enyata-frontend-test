@@ -375,7 +375,7 @@ a {
 }
 @media screen and (max-width: 774px) {
   .drawer_inner_container {
-    width: 95vw;
+    width: 100vw;
   }
 }
 .drawer_inner_container .img_container {
