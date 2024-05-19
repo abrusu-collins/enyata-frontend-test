@@ -15,6 +15,7 @@ import Alert from "@mui/material/Alert";
 import Modal from "@mui/material/Modal";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
+import { getAbundantColor } from "../services/getAbundantColor";
 function AllPokemons() {
   const pokemonName = useStore((state) => state.pokemonName);
   const setPokemonName = useStore((state) => state.setPokemonName);
@@ -52,6 +53,7 @@ function AllPokemons() {
       page: "similar",
     },
   ];
+  const [pokemonImgGradients, setPokemonImgGradients] = useState("");
   const [displayCount, setDisplayCount] = useState(0);
   const [singlePokemonData, setSinglePokemonData] = useState(null);
   const [currentPokemon, setcurrentPokemon] = useState(null);
@@ -93,6 +95,7 @@ function AllPokemons() {
         console.log(res);
         setSinglePokemonData(res);
         setOpen(true);
+        getAbundantColor(res.id, setPokemonImgGradients);
       })
       .catch((err) => {
         console.log(err);
@@ -106,6 +109,11 @@ function AllPokemons() {
         Nprogress.done();
       });
   };
+  // useEffect(() => {
+  //   if (pokemonImgGradients) {
+  //     console.log(pokemonImgGradients);
+  //   }
+  // }, [pokemonImgGradients]);
   useEffect(() => {
     if (errorMessage) {
       openTheSnackBar();
@@ -327,7 +335,14 @@ function AllPokemons() {
 
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <div className="drawer_inner_container">
-          <div className="img_container">
+          <div
+            className="img_container"
+            style={{
+              background: pokemonImgGradients
+                ? `linear-gradient(180deg, ${pokemonImgGradients.topRGB} 0%, ${pokemonImgGradients.bottomRGB} 100%)`
+                : " linear-gradient(180deg, #7fcad1 0%, #3da0a9 100%)",
+            }}
+          >
             <a
               href=" "
               className="back_arrow"
