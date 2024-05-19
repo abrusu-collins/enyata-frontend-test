@@ -95,7 +95,10 @@ function AllPokemons() {
   };
   const fetchSimilarPokemons = async (type) => {
     getSimilarPokemons(type).then((res) => {
-      console.log(res.pokemon.filter((pokemon)=>{return pokemon.name!== currentPokemon.name}));
+      const filteredArray = res.pokemon.filter((pokemon) => {
+        return pokemon.pokemon.name !== currentPokemon.name;
+      });
+      console.log(filteredArray.splice(0, 2));
     });
   };
   const fetchSinglePokemon = async (name) => {
