@@ -315,6 +315,7 @@ function AllPokemons() {
                 },
                 "&.Mui-selected": {
                   backgroundColor: theme,
+                  color:"white",
                 },
                 "&.MuiPaginationItem-ellipsis": {
                   background: "transparent",
