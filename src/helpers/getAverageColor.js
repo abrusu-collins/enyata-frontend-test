@@ -1,11 +1,12 @@
 import { FastAverageColor } from "fast-average-color";
+import { getPokemonImage } from "./getPokemonImage";
 export const getAverageColor = async (pokemonId, callback) => {
   const fac = new FastAverageColor();
   const img = document.createElement("IMG");
   img.crossOrigin = "Anonymous";
   img.setAttribute(
     "src",
-    `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemonId}.svg`
+    getPokemonImage(pokemonId)
   );
   fac
     .getColorAsync(img)

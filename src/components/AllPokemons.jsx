@@ -15,7 +15,8 @@ import Alert from "@mui/material/Alert";
 import Modal from "@mui/material/Modal";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import { getAverageColor } from "../services/getAverageColor";
+import { getAverageColor } from "../helpers/getAverageColor";
+import { getPokemonImage } from "../helpers/getPokemonImage";
 function AllPokemons() {
   const pokemonName = useStore((state) => state.pokemonName);
   const setPokemonName = useStore((state) => state.setPokemonName);
@@ -242,10 +243,7 @@ function AllPokemons() {
                 }}
               >
                 <div className="pokemon_img_container">
-                  <img
-                    src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
-                    alt=""
-                  />
+                  <img src={getPokemonImage(pokemon.id)} alt="" />
                 </div>
                 <p className="pokemon_name">{pokemon.name}</p>
                 {pokemonIndex === index && (
@@ -355,16 +353,10 @@ function AllPokemons() {
               <FaArrowLeftLong size={20} />
             </a>
             {currentPokemon?.id ? (
-              <img
-                src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${currentPokemon.id}.svg`}
-                alt=""
-              />
+              <img src={getPokemonImage(currentPokemon.id)} alt="" />
             ) : (
               singlePokemonData && (
-                <img
-                  src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${singlePokemonData.id}.svg`}
-                  alt=""
-                />
+                <img src={getPokemonImage(singlePokemonData.id)} alt="" />
               )
             )}
           </div>
