@@ -6,7 +6,7 @@ function NotFound() {
   return (
     <div className="not_found">
       <div>
-        <img src="/images/404.jpg" alt="" />
+        <img src="/images/_404.jpg" alt="" />
         <p>
           Looks like the page you <br /> are looking for does not exist
         </p>
