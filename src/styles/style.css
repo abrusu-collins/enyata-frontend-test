@@ -646,3 +646,53 @@ a {
   width: 30px;
   border-radius: 50%;
 }
+
+.not_found > div {
+  height: 100vh;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-direction: column;
+  margin: auto;
+}
+@media screen and (max-width: 474px) {
+  .not_found > div {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 376px) {
+  .not_found > div {
+    width: 96%;
+  }
+}
+.not_found > div img {
+  width: 30%;
+  border-radius: 12px;
+}
+@media screen and (max-width: 769px) {
+  .not_found > div img {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 474px) {
+  .not_found > div img {
+    width: 70%;
+  }
+}
+.not_found > div p {
+  font-size: 24px;
+  font-family: clashDisplay;
+  text-align: center;
+}
+.not_found > div > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.not_found > div > div a {
+  color: white;
+  padding: 10px 40px;
+  border-radius: 8px;
+}
