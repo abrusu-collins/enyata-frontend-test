@@ -26,7 +26,6 @@ function Home() {
       e.preventDefault();
     }
     if (!pokemonName) {
-      console.log("no name");
       openTheSnackBar();
       return;
     }

@@ -81,9 +81,6 @@ function AllPokemons() {
     }
     setOpenSnackBar(false);
   };
-  // const toggleDrawer = (newOpen) => () => {
-  //   setOpen(newOpen);
-  // };
   const closeDrawer = () => {
     setOpen(false);
     setDetailToShow("about");
@@ -103,22 +100,15 @@ function AllPokemons() {
       const similarPokemons = filteredArray.splice(0, 2);
       similarPokemons.map(async (similarPokemon) => {
         return getSinglePokemon(similarPokemon.pokemon.name).then((res) => {
-          // console.log(res);
           setSimilarPokemonsArray((prev) => [...prev, res]);
         });
       });
     });
   };
-  useEffect(() => {
-    if (similarPokemonsArray.length > 0) {
-      console.log(similarPokemonsArray);
-    }
-  }, [similarPokemonsArray]);
   const fetchSinglePokemon = async (name) => {
     Nprogress.start();
     getSinglePokemon(name.toLowerCase())
       .then((res) => {
-        // console.log(res);
         setSinglePokemonData(res);
         fetchSimilarPokemons(res.types[0].type.name);
         setOpen(true);
@@ -140,11 +130,6 @@ function AllPokemons() {
         Nprogress.done();
       });
   };
-  // useEffect(() => {
-  //   if (errorMessage) {
-  //     openTheSnackBar();
-  //   }
-  // }, [errorMessage]);
   useEffect(() => {
     if (pokemonName) {
       setcurrentPokemon({ name: pokemonName });
@@ -161,8 +146,6 @@ function AllPokemons() {
     const tempArray = [];
     getAllPokemons()
       .then((res) => {
-        // console.log(res);`
-
         for (let i of res.results) {
           tempArray.push({ ...i, id: res.results.indexOf(i) + 1 });
         }

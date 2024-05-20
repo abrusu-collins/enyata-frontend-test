@@ -10,7 +10,6 @@ function NotFound() {
         <p>
           Looks like the page you <br /> are looking for does not exist
         </p>
-
         <div>
           <a href="/" style={{ background: theme }}>
             Go Home
