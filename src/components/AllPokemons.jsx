@@ -258,7 +258,7 @@ function AllPokemons() {
           </a>
         </div>
       </div>
-      <div className="pokemon_list">
+      <div className="pokemon_list container">
         {displayData.length > 0 &&
           displayData.map((pokemon, index) => {
             return (
@@ -297,7 +297,7 @@ function AllPokemons() {
           })}
       </div>
 
-      <div className="pagination_and_page_size_selector">
+      <div className="pagination_and_page_size_selector container">
         <div className="pagination">
           <Pagination
             count={Math.ceil(500 / displayCount)}
@@ -315,7 +315,7 @@ function AllPokemons() {
                 },
                 "&.Mui-selected": {
                   backgroundColor: theme,
-                  color:"white",
+                  color: "white",
                 },
                 "&.MuiPaginationItem-ellipsis": {
                   background: "transparent",
