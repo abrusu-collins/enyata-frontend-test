@@ -647,6 +647,12 @@ a {
   border-radius: 50%;
 }
 
+.not_found {
+  background-image: url("../../public/images/noise.png");
+  background-size: cover;
+  background-position: center;
+  background-color: #f1f1f1;
+}
 .not_found > div {
   height: 100vh;
   width: 75%;
